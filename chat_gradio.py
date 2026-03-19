@@ -48,12 +48,12 @@ def chat_response(user_input:str,collection_name:str,cli:QdrantClient):
 with gr.Blocks() as demo:
     
     client_store = gr.Textbox(label='enter storage location')
-    btn1 = gr.Button("entered storage location")
+    btn1 = gr.Button("Upload")
     client = gr.State()  
 
     path_manage = gr.File(file_types=['.pdf'],file_count="multiple",label='upload pdf')
     path = gr.State()
-    btn2 = gr.Button("pdf embedded")
+    btn2 = gr.Button("Submit PDF")
     name = gr.State()
 
 
@@ -66,7 +66,7 @@ with gr.Blocks() as demo:
 
     
 
-    final_output = gr.Textbox(label='hehe')
+    final_output = gr.Textbox(label='Response')
     btn1.click(get_client, inputs=client_store, outputs=client)
     btn2.click(pdf_handler, inputs=[path_manage,client,path], outputs=name)
     btn3.click(chat_response,inputs=[que,name,client],outputs=final_output)
